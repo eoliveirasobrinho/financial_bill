@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: financial-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres87
+      POSTGRES_PASSWORD: postgres8725
+      POSTGRES_DB: findb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - financial-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: financial-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
+    networks:
+      - financial-network
+
+volumes:
+  postgres_data:
+
+networks:
+  financial-network:
+    driver: bridge
