@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:prod-postgres}:${DB_PORT:5432}/${DB_NAME:financial_prod}
+    username: ${DB_USER:prod_user}
+    password: ${DB_PASS:prod_secret}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://${DB_HOST:prod-postgres}:${DB_PORT:5432}/${DB_NAME:financial_prod}
+    user: ${DB_USER:prod_user}
+    password: ${DB_PASS:prod_secret}
+
+server:
+  port: 80

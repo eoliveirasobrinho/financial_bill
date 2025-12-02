@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://qa-db-server:5432/findb
+    username: qa_user
+    password: qa_pass
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://qa-db-server:5432/findb
+    user: qa_user
+    password: qa_pass
+
+server:
+  port: 8081

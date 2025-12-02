@@ -1,8 +1,9 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/findb
-    username: postgres87
-    password: postgres8725
+  application:
+    name: financeiro-api
+
+  profiles:
+    active: dev  # dev | qa | prod
 
   jpa:
     hibernate:
@@ -12,8 +13,7 @@ spring:
       hibernate:
         format_sql: true
 
-  flyway:
-    enabled: false
-    url: jdbc:postgresql://localhost:5432/findb
-    user: postgres87
-    password: postgres8725
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO

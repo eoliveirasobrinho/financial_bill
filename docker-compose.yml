@@ -1,9 +1,10 @@
 version: '3.8'
 
 services:
-  postgres:
+
+  postgres-dev:
     image: postgres:15
-    container_name: financial-db
+    container_name: financial-db-dev
     restart: always
     environment:
       POSTGRES_USER: postgres87
@@ -12,9 +13,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - dev_data:/var/lib/postgresql/data
     networks:
-      - financial-network
+      - financial-net
 
   pgadmin:
     image: dpage/pgadmin4
@@ -26,13 +27,45 @@ services:
     ports:
       - "8081:80"
     depends_on:
-      - postgres
+      - postgres-dev
     networks:
-      - financial-network
+      - financial-net
 
-volumes:
-  postgres_data:
+  postgres-qa:
+    image: postgres:15
+    container_name: financial-db-qa
+    restart: always
+    environment:
+      POSTGRES_USER: qa_user
+      POSTGRES_PASSWORD: qa_pass
+      POSTGRES_DB: findb_qa
+    ports:
+      - "5433:5432"
+    volumes:
+      - qa_data:/var/lib/postgresql/data
+    networks:
+      - financial-net
+
+  postgres-prod:
+    image: postgres:15
+    container_name: financial-db-prod
+    restart: always
+    environment:
+      POSTGRES_USER: prod_user
+      POSTGRES_PASSWORD: prod_secret
+      POSTGRES_DB: financial_prod
+    ports:
+      - "5434:5432"
+    volumes:
+      - prod_data:/var/lib/postgresql/data
+    networks:
+      - financial-net
 
 networks:
-  financial-network:
+  financial-net:
     driver: bridge
+
+volumes:
+  dev_data:
+  qa_data:
+  prod_data:
