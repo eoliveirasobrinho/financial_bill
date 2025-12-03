@@ -1,10 +1,11 @@
 name: CI/CD - Financial API
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  push:
+    branches-ignore: [ "main" ]
+
 
 jobs:
   build-test-package:
