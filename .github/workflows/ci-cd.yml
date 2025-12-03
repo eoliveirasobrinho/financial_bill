@@ -1,4 +1,4 @@
-name: CI/CD - Financial App
+name: CI/CD - Financial API
 
 on:
   push:
@@ -7,54 +7,72 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-test:
-    name: Build & Test
+  build-test-package:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres87
+          POSTGRES_PASSWORD: postgres8725
+          POSTGRES_DB: findb
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd="pg_isready -U postgres87 -d findb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      SPRING_PROFILES_ACTIVE: ci
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/findb
+      SPRING_DATASOURCE_USERNAME: postgres87
+      SPRING_DATASOURCE_PASSWORD: postgres8725
+
     steps:
-      - name: ⬇️ Checkout repository
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: ☕ Setup JDK 21
+      - name: Instalar Java 21
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
-          java-version: "21"
+          distribution: temurin
+          java-version: 21
 
-      - name: 📦 Cache Maven dependencies
+      - name: Configurar Cache Maven
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 
-      - name: 🏗️ Build and Run Tests
-        run: mvn clean package -DskipTests=false
-
-      - name: 📤 Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: financialit-jar
-          path: target/*.jar
+      - name: Compilar Projeto
+        run: mvn -B -e -DskipTests=false clean verify
 
   docker-build-push:
-    name: Docker Build & Push to Docker Hub
+    needs: build-test-package
     runs-on: ubuntu-latest
-    needs: build-test
 
     steps:
-      - name: ⬇️ Checkout repository
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: 🔐 Login to Docker Hub
+      - name: Login no Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 🛠️ Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USER }}/financialit:latest .
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: 🚀 Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USER }}/financialit:latest
+      - name: Build e Push Multi-Stage da Imagem
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USER }}/financial-api:latest
+            ${{ secrets.DOCKERHUB_USER }}/financial-api:${{ github.run_number }}
