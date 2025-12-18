@@ -10,13 +10,15 @@ import java.util.Objects;
 
 public class InvoicePayable {
     private Long id;
-    private final String description;
-    private final BigDecimal amount;
-    private final LocalDate dueDate;
+    private String description;
+    private BigDecimal amount;
+    private LocalDate dueDate;
     private LocalDate paymentDate;
     private Status status;
-    private final Category category;
-    private final Supplier supplier;
+    private Category category;
+    private Supplier supplier;
+
+    
 
     public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Category category, Supplier supplier) {
         this.description = description;
@@ -37,12 +39,38 @@ public class InvoicePayable {
         this.status = Status.PENDING;
     }
 
+    
+    public InvoicePayable(){}
+   
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
     public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public Category getCategory() {
@@ -50,26 +78,9 @@ public class InvoicePayable {
     }
 
 
-    public LocalDate getDueDate() {
-        return dueDate;
+    public Supplier getSupplier() {
+        return supplier;
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
 
     public boolean isOverdue() {
         return status != Status.PAID && LocalDate.now().isAfter(dueDate);

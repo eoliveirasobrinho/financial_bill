@@ -2,15 +2,25 @@ package com.itgen.financialit.domain.model;
 
 public class Supplier {
     private Long id;
-    private final String name;
-    private final String document;
-    private final String email;
+    private String name;
+    private String document;
+    private String email;
 
     public Supplier(String name, String document, String email) {
         this.name = name;
         this.document = document;
         this.email = email;
     }
+
+    
+
+    public Supplier(Long id) {
+        this.id = id;
+    }
+
+
+    public Supplier(){}
+
 
 
     public String getName() {
@@ -39,4 +49,5 @@ public class Supplier {
                 ", document='" + document + '\'' +
                 '}';
     }
+
 }
