@@ -9,17 +9,18 @@ import java.util.Objects;
 
 public class InvoiceReceived {
     private Long id;
-    private final String description;
-    private final BigDecimal amount;
-    private final LocalDate dueDate;
+    private String description;
+    private BigDecimal amount;
+    private LocalDate dueDate;
     private LocalDate receivedDate;
     private Status status;
-    private final Category category;
+    private Category category;
 
-    public InvoiceReceived(String description, BigDecimal amount, LocalDate dueDate, Category category) {
+    public InvoiceReceived(String description, BigDecimal amount, LocalDate dueDate, LocalDate receivedDate, Category category) {
         this.description = description;
         this.amount = amount;
         this.dueDate = dueDate;
+        this.receivedDate = receivedDate;
         this.category = category;
         this.status = Status.PENDING;
     }
@@ -34,6 +35,7 @@ public class InvoiceReceived {
         this.id = id;
     }
 
+    public InvoiceReceived(){}
 
 
     public Long getId() {

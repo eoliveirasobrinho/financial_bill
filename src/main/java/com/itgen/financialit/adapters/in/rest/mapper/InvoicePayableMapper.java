@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
@@ -19,6 +20,10 @@ public interface InvoicePayableMapper {
     )
     InvoicePayable toDomain(RequestInvoicePayableDTO invoicePayableDTO);
 
+    @Mapping(
+        target = "supplierId", source = "supplier.id"
+    )
+    ResponseInvoicePayableDTO toResponse(InvoicePayable dto);
     
     default InvoicePayable toInvoicePayable(RequestInvoicePayableDTO dto) {
         Supplier supplier = new Supplier(dto.supplierId());
