@@ -73,6 +73,10 @@ public class InvoicePayable {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Category getCategory() {
         return category;
     }
