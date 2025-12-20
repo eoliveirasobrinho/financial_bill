@@ -1,24 +1,16 @@
 package com.itgen.financialit.adapters.out.persistence.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
-@Component
 @Mapper(componentModel = "spring")
-public interface InvoicePayablePersistence {
+public interface InvoicePayablePersistenceMapper {
 
-    @Mapping(
-        target = ".",
-        conditionExpression = "java(toInvoicePayablePersistence(entity))"
-    )
     InvoicePayable toDomain(InvoicePayableEntity entity);
 
-    @Mapping(target = "supplierId", source = "supplier.id")
     InvoicePayableEntity toEntity(InvoicePayable domain);
 
     default InvoicePayable toInvoicePayablePersistence(InvoicePayableEntity entity) {

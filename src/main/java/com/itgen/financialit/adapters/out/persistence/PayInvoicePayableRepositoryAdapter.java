@@ -3,10 +3,8 @@ package com.itgen.financialit.adapters.out.persistence;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
-
-
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
-import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistence;
+import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
 import com.itgen.financialit.adapters.out.persistence.repository.JpaInvoicePayableRepository;
 import com.itgen.financialit.application.port.out.PayInvoicePayableRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
@@ -14,13 +12,12 @@ import com.itgen.financialit.domain.model.InvoicePayable;
 @Repository
 public class PayInvoicePayableRepositoryAdapter implements PayInvoicePayableRepositoryPort{
 
-    private final JpaInvoicePayableRepository jpaInvoicePayableRepository;
-
-    private final InvoicePayablePersistence mapper;
+    private final JpaInvoicePayableRepository jpaInvoicePayableRepository;  
+    private final InvoicePayablePersistenceMapper mapper;
 
     public PayInvoicePayableRepositoryAdapter(
         JpaInvoicePayableRepository jpaInvoicePayableRepository,
-        InvoicePayablePersistence mapper
+        InvoicePayablePersistenceMapper mapper
     ) {
         this.mapper = mapper;
         this.jpaInvoicePayableRepository = jpaInvoicePayableRepository;
