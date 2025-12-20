@@ -3,7 +3,6 @@ package com.itgen.financialit.adapters.in.rest;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
 import com.itgen.financialit.application.port.in.PayInvoicePayableUseCase;
+import com.itgen.financialit.application.service.PayInvoicePayableService;
 
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class InvoicePayableController {
 
     
-    private final PayInvoicePayableUseCase payInvoicePayableUseCase;
+    private final PayInvoicePayableService payInvoicePayableService;
 
-    public InvoicePayableController(PayInvoicePayableUseCase payInvoicePayableUseCase) {
-        this.payInvoicePayableUseCase = payInvoicePayableUseCase;
+    public InvoicePayableController(PayInvoicePayableService payInvoicePayableService) {
+        this.payInvoicePayableService = payInvoicePayableService;
     }
 
     @PostMapping("/create")
@@ -58,9 +58,9 @@ public class InvoicePayableController {
     }
 
     @PatchMapping("/pay/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void pay(@PathVariable Long id, LocalDate paymenDate) {
-        payInvoicePayableUseCase.pay(id, paymenDate);
+        payInvoicePayableService.pay(id, paymenDate);
     }
 
     
