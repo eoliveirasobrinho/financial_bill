@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
-import com.itgen.financialit.application.port.in.PayInvoicePayableUseCase;
+import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
+import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
+import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapperImpl;
+import com.itgen.financialit.application.service.CreateInvoicePayableService;
 import com.itgen.financialit.application.service.PayInvoicePayableService;
+import com.itgen.financialit.domain.model.InvoicePayable;
 
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,14 +33,27 @@ public class InvoicePayableController {
 
     
     private final PayInvoicePayableService payInvoicePayableService;
+    private final CreateInvoicePayableService createInvoicePayableService;
+    private final InvoicePayableMapper mapper;
 
-    public InvoicePayableController(PayInvoicePayableService payInvoicePayableService) {
+    public InvoicePayableController(
+        PayInvoicePayableService payInvoicePayableService, 
+        CreateInvoicePayableService createInvoicePayableService,
+        InvoicePayableMapper mapper    
+    ) {
         this.payInvoicePayableService = payInvoicePayableService;
+        this.createInvoicePayableService = createInvoicePayableService;
+        this.mapper = mapper;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<RequestInvoicePayableDTO> createInvoiceToPay(@RequestBody RequestInvoicePayableDTO requestDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ResponseInvoicePayableDTO> createInvoiceToPay(@RequestBody RequestInvoicePayableDTO requestDto) {
+        System.out.println(requestDto);
+        InvoicePayable invoice = mapper.toDomain(requestDto);
+        System.out.println(invoice);
+        InvoicePayable invoiceCreated = createInvoicePayableService.createInvoicePayable(invoice);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(invoiceCreated));
     }
 
     @GetMapping("/all-invoices")

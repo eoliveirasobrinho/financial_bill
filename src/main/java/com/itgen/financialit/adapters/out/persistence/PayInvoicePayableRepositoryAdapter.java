@@ -34,4 +34,6 @@ public class PayInvoicePayableRepositoryAdapter implements PayInvoicePayableRepo
         jpaInvoicePayableRepository.save(invoicePayableEntity);
     }
 
+    
+
 }

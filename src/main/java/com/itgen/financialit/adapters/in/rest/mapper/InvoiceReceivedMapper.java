@@ -8,7 +8,6 @@ import com.itgen.financialit.domain.model.InvoiceReceived;
 
 
 @Mapper(componentModel = "spring")
-
 public interface InvoiceReceivedMapper {
 
     InvoiceReceived toDomain(RequestInvoiceReceivedDTO invoiceReceivedDTO);

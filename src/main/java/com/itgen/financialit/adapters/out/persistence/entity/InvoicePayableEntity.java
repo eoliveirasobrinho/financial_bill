@@ -22,8 +22,12 @@ public class InvoicePayableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private BigDecimal amount;
+    @Column(nullable = false)
     private LocalDate dueDate;
     private LocalDate paymentDate;
 
@@ -35,6 +39,6 @@ public class InvoicePayableEntity {
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "supplier_id", nullable = false)
     private SupplierEntity supplier;
 }

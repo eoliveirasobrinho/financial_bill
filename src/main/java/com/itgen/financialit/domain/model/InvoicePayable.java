@@ -26,16 +26,6 @@ public class InvoicePayable {
         this.dueDate = dueDate;
         this.category = category;
         this.supplier = supplier;
-    }
-
-    public InvoicePayable(Long id, String description, BigDecimal amount, LocalDate dueDate, Supplier supplier, Category category, LocalDate paymentDate) {
-        this.id = id;
-        this.description = description;
-        this.amount = amount;
-        this.dueDate = dueDate;
-        this.supplier = supplier;
-        this.category = category;
-        this.paymentDate = paymentDate;
         this.status = Status.PENDING;
     }
 
@@ -85,6 +75,7 @@ public class InvoicePayable {
     public Supplier getSupplier() {
         return supplier;
     }
+
 
     public boolean isOverdue() {
         return status != Status.PAID && LocalDate.now().isAfter(dueDate);

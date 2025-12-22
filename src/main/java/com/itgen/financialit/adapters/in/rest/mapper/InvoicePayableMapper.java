@@ -1,5 +1,7 @@
 package com.itgen.financialit.adapters.in.rest.mapper;
 
+import java.time.LocalDate;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,23 +13,11 @@ import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
 @Component
-@Mapper(componentModel = "spring")
-public interface InvoicePayableMapper {
+public class InvoicePayableMapper {
  
-    @Mapping(
-        target = ".",
-        expression = "java(toInvoicePayable(dto))"
-    )
-    InvoicePayable toDomain(RequestInvoicePayableDTO invoicePayableDTO);
 
-    @Mapping(
-        target = "supplierId", source = "supplier.id"
-    )
-    ResponseInvoicePayableDTO toResponse(InvoicePayable dto);
-    
-    default InvoicePayable toInvoicePayable(RequestInvoicePayableDTO dto) {
+    public InvoicePayable toDomain(RequestInvoicePayableDTO dto) {
         Supplier supplier = new Supplier(dto.supplierId());
-
         return new InvoicePayable(
             dto.description(),
             dto.amount(),
@@ -37,7 +27,18 @@ public interface InvoicePayableMapper {
         );
     }
     
-        
+    public ResponseInvoicePayableDTO toResponse(InvoicePayable domain) {
+        return new ResponseInvoicePayableDTO(
+            domain.getId(),
+            domain.getDescription(),
+            domain.getAmount(),
+            domain.getDueDate(),
+            domain.getPaymentDate(),
+            domain.getStatus(),
+            domain.getCategory(),
+            domain.getSupplier().getId()
+        );
+    }
        
     
 }   

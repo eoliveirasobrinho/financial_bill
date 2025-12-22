@@ -27,7 +27,7 @@ public class PayInvoicePayableService implements PayInvoicePayableUseCase{
             throw new IllegalStateException(" your invoice already be paid");
        }
        
-       
+       invoicePayable.setStatus(Status.PAID);
        paymentDate = LocalDate.now();
     }
 }
