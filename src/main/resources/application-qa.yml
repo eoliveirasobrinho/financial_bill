@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   flyway:
-    enabled: true
+    enabled: false
     url: jdbc:postgresql://qa-db-server:5432/findb
     user: qa_user
     password: qa_pass

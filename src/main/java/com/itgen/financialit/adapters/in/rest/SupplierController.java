@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("supplier")
+@RequestMapping("/supplier")
 public class SupplierController {
 
     private final CreateSupplierService service;
@@ -31,7 +31,6 @@ public class SupplierController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseSupplierDTO> createSupplier(@RequestBody RequestSuplierDTO entity) {
         Supplier supplier = mapper.toDomain(entity);
-        System.out.println(supplier);
         Supplier supplierToMapper = service.createSupplier(supplier);
         ResponseSupplierDTO supplierCreated = mapper.toResponse(supplierToMapper);
         return ResponseEntity.status(HttpStatus.CREATED).body(supplierCreated);

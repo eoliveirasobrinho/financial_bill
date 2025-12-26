@@ -38,6 +38,13 @@ public class InvoicePayable {
         this.supplier = supplier;
     }
 
+    // public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Supplier supplier) {
+    //     this.description = description;
+    //     this.amount = amount;
+    //     this.dueDate = dueDate;
+    //     this.supplier = supplier;
+    // }
+
     
     public InvoicePayable(){}
    
@@ -45,6 +52,10 @@ public class InvoicePayable {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

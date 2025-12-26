@@ -18,6 +18,11 @@ public class Supplier {
         this.document = document;
         this.email = email;
     }
+
+    public Supplier(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
     
 
     public Supplier(Long id) {
@@ -45,7 +50,25 @@ public class Supplier {
         return email;
     }
 
+    
 
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {
