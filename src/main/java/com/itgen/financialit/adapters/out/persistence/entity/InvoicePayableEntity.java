@@ -40,5 +40,16 @@ public class InvoicePayableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id", nullable = false)
-    private SupplierEntity supplier;
+    private SupplierEntity supplierEntity;
+
+    public InvoicePayableEntity(Long id , String description, BigDecimal amount, LocalDate dueDate, Category category, SupplierEntity supplierEntity) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.dueDate = dueDate;
+        this.paymentDate = null;
+        this.category = category;
+        this.supplierEntity = supplierEntity;
+        this.status = Status.PENDING;
+    }
 }

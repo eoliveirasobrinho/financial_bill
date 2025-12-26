@@ -6,12 +6,18 @@ public class Supplier {
     private String document;
     private String email;
 
-    public Supplier(String name, String document, String email) {
+    public Supplier(Long id, String name, String document, String email) {
+        this.id = id;
         this.name = name;
         this.document = document;
         this.email = email;
     }
 
+    public Supplier(String name, String document, String email) {
+        this.name = name;
+        this.document = document;
+        this.email = email;
+    }
     
 
     public Supplier(Long id) {

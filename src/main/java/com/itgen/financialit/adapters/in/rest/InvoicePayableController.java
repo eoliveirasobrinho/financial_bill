@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
-import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
-import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapperImpl;
 import com.itgen.financialit.application.service.CreateInvoicePayableService;
 import com.itgen.financialit.application.service.PayInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;

@@ -16,6 +16,8 @@ import com.itgen.financialit.domain.model.Supplier;
 public class InvoicePayableMapper {
  
 
+
+
     public InvoicePayable toDomain(RequestInvoicePayableDTO dto) {
         Supplier supplier = new Supplier(dto.supplierId());
         return new InvoicePayable(

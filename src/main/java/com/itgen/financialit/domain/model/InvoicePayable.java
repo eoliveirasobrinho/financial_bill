@@ -29,6 +29,15 @@ public class InvoicePayable {
         this.status = Status.PENDING;
     }
 
+    public InvoicePayable(Long id, String description, BigDecimal amount, LocalDate dueDate, Category category, Supplier supplier) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.dueDate = dueDate;
+        this.category = category;
+        this.supplier = supplier;
+    }
+
     
     public InvoicePayable(){}
    
