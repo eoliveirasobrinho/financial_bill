@@ -14,5 +14,5 @@ public record ResponseInvoicePayableDTO(
     LocalDate paymentDate, 
     Status status, 
     Category category, 
-    Long supplierId) {
+    ResponseSupplierDTO supplier) {
 }

@@ -13,7 +13,12 @@ public class InvoicePayablePersistenceMapper {
 
     
     public InvoicePayableEntity toEntity(InvoicePayable domain){
-        SupplierEntity supplierEntity = new SupplierEntity(domain.getSupplier().getId());
+
+        SupplierEntity supplierEntity = new SupplierEntity(domain.getSupplier().getId(),
+        domain.getSupplier().getName(),
+        domain.getSupplier().getDocument(),
+        domain.getSupplier().getEmail());
+
         return new InvoicePayableEntity(
             domain.getId(),
             domain.getDescription(),
@@ -27,7 +32,12 @@ public class InvoicePayablePersistenceMapper {
     }
 
     public InvoicePayable toDomain(InvoicePayableEntity entity){
-        Supplier supplier = new Supplier(entity.getSupplierEntity().getId());
+        
+        Supplier supplier = new Supplier(entity.getSupplierEntity().getId(),
+        entity.getSupplierEntity().getName(),
+        entity.getSupplierEntity().getDocument(),
+        entity.getSupplierEntity().getEmail());
+
         return new InvoicePayable(
             entity.getDescription(),
             entity.getAmount(),

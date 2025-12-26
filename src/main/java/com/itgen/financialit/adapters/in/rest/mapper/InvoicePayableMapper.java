@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.ResponseSupplierDTO;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
@@ -38,8 +39,18 @@ public class InvoicePayableMapper {
             domain.getPaymentDate(),
             domain.getStatus(),
             domain.getCategory(),
-            domain.getSupplier().getId()
+            toSupplierResponse(domain.getSupplier())
         );
+    }
+
+     private ResponseSupplierDTO toSupplierResponse(Supplier supplier) {
+        if (supplier == null) return null;
+
+        return new ResponseSupplierDTO(
+            supplier.getId(),
+            supplier.getName(),
+            supplier.getDocument(),
+            supplier.getEmail());
     }
        
     
