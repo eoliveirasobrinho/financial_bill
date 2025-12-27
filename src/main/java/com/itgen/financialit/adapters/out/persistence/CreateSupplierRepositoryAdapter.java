@@ -1,5 +1,6 @@
 package com.itgen.financialit.adapters.out.persistence;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -27,14 +28,14 @@ public class CreateSupplierRepositoryAdapter implements CreateSupplierRepository
     @Override
     public Supplier save(Supplier supplier) {
         SupplierEntity supplierEntity = mapper.toEntity(supplier);
-        SupplierEntity supplierCreated = repository.save(supplierEntity);
+        SupplierEntity supplierCreated = repository.save(Objects.requireNonNull(supplierEntity));
         Supplier supplierSaved = mapper.toDomain(supplierCreated); 
         return supplierSaved;
     }
 
     @Override
     public Optional<Supplier> findById(Long id) {
-        return repository.findById(id).map(mapper::toDomain);
+        return repository.findById(Objects.requireNonNull(id)).map(mapper::toDomain);
     }
 
 }
