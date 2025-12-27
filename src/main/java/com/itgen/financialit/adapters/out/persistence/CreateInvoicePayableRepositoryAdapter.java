@@ -31,7 +31,6 @@ public class CreateInvoicePayableRepositoryAdapter implements CreateInvoicePayab
     }
 
 
-    @Transactional
     @Override
     public InvoicePayable save(InvoicePayable invoicePayable) {
       InvoicePayableEntity invoicePayableEntity = mapper.toEntity(invoicePayable);

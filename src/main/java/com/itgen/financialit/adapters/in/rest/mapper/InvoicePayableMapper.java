@@ -1,6 +1,7 @@
 package com.itgen.financialit.adapters.in.rest.mapper;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -41,6 +42,14 @@ public class InvoicePayableMapper {
             domain.getCategory(),
             toSupplierResponse(domain.getSupplier())
         );
+    }
+
+    public List<ResponseInvoicePayableDTO> toResponseList(List<InvoicePayable> list) {
+        if(list == null) {
+            return List.of();
+        }
+
+        return list.stream().map(this::toResponse).toList();
     }
 
      private ResponseSupplierDTO toSupplierResponse(Supplier supplier) {

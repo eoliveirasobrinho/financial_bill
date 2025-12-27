@@ -9,6 +9,8 @@ import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
 
@@ -25,6 +27,7 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
     }
 
     @Override
+    @Transactional
     public InvoicePayable createInvoicePayable(InvoicePayable invoicePayable) {
         Supplier supplier = repositorySupplier.findById(invoicePayable.getSupplier().getId()).orElseThrow(() -> new IllegalStateException("Supplier was not created"));
 

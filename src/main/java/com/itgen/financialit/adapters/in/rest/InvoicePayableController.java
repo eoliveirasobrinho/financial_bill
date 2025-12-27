@@ -1,7 +1,10 @@
 package com.itgen.financialit.adapters.in.rest;
 
 
+import static org.mockito.ArgumentMatchers.refEq;
+
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
+import com.itgen.financialit.application.port.in.GetAllInvoicesPayableUseCase;
 import com.itgen.financialit.application.service.CreateInvoicePayableService;
+import com.itgen.financialit.application.service.GetAllInvoicesPayablesService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,15 +36,19 @@ public class InvoicePayableController {
     
     
     private final CreateInvoicePayableService createInvoicePayableService;
+    private final GetAllInvoicesPayablesService getAllInvoicesPayableService;
     private final InvoicePayableMapper mapper;
 
     public InvoicePayableController( 
         CreateInvoicePayableService createInvoicePayableService,
-        InvoicePayableMapper mapper    
+        InvoicePayableMapper mapper,
+        GetAllInvoicesPayablesService getAllInvoicesPayableService
     ) {
         
         this.createInvoicePayableService = createInvoicePayableService;
+        this.getAllInvoicesPayableService = getAllInvoicesPayableService;
         this.mapper = mapper;
+        
     }
 
     @PostMapping("/create")
@@ -51,8 +60,11 @@ public class InvoicePayableController {
     }
 
     @GetMapping("/all-invoices")
-    public ResponseEntity<ResponseInvoicePayableDTO> getInvoicesPayable(){
-        return ResponseEntity.status(HttpStatus.OK).build();
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ResponseInvoicePayableDTO>> getInvoicesPayable(){
+        List<InvoicePayable> invoices = getAllInvoicesPayableService.getAllInvoicesPayableUseCase();
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponseList(invoices));
+        
     }
 
     @PutMapping("/update/{id}")

@@ -1,0 +1,30 @@
+package com.itgen.financialit.application.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.itgen.financialit.application.port.in.GetAllInvoicesPayableUseCase;
+import com.itgen.financialit.application.port.out.GetAllInvoicesPayablesRepositoryPort;
+import com.itgen.financialit.domain.model.InvoicePayable;
+
+@Service
+public class GetAllInvoicesPayablesService implements GetAllInvoicesPayableUseCase{
+
+    private GetAllInvoicesPayablesRepositoryPort repositoryPort;
+
+    public GetAllInvoicesPayablesService(GetAllInvoicesPayablesRepositoryPort repositoryPort){
+        this.repositoryPort = repositoryPort;
+    }
+
+    @Override
+    public List<InvoicePayable> getAllInvoicesPayableUseCase() {
+        List<InvoicePayable> invoices = repositoryPort.getAllInvoicesPayables();
+        if(invoices.isEmpty()){
+            return List.of();
+        }
+
+        return invoices;
+    }
+
+}
