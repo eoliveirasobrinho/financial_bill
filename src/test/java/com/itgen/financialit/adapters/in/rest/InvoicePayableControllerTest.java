@@ -68,4 +68,47 @@ public class InvoicePayableControllerTest {
                 """))
                 .andExpect(status().isCreated());
     }
+
+        @Test
+        void shouldReturnBadRequestWhenPayloadIsInvalid() throws Exception {
+                mockMvc.perform(post("/invoice/payable/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                {
+                  "description": "Conta teste",
+                  "dueDate": "25-02-2026",
+                  "category": "internet",
+                  "supplierId": 4
+                 }
+                 """))
+                .andExpect(status().isBadRequest());
+        }
+
+        @Test
+        void shouldReturnInternalServerErrorWhenUnexpectedErrorOccurs() throws Exception {
+                when(invoicePayableMapper.toDomain(any()))
+                .thenReturn(mock(InvoicePayable.class));
+
+                when(createInvoicePayableService.createInvoicePayable(any()))
+                .thenThrow(new RuntimeException("DB down"));
+
+                when(invoicePayableMapper.toResponse(any()))
+                .thenReturn(mock(ResponseInvoicePayableDTO.class));
+
+                mockMvc.perform(post("/invoice/payable/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                        {
+                                "description": "Conta teste",
+                                "amount": 415,
+                                "dueDate": "25-02-2026",
+                                "category": "INTERNET",
+                                "supplierId": 4
+                        }
+                        """))
+                        .andExpect(status().isInternalServerError());
+        }
+
+
+
 }
