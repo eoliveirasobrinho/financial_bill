@@ -1,9 +1,12 @@
 package com.itgen.financialit.adapters.out.persistence;
 
+import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import org.hibernate.validator.internal.util.logging.Log;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
 import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
@@ -34,15 +37,10 @@ public class CreateInvoicePayableRepositoryAdapter implements CreateInvoicePayab
     @Override
     public InvoicePayable save(InvoicePayable invoicePayable) {
       InvoicePayableEntity invoicePayableEntity = mapper.toEntity(invoicePayable);
-      InvoicePayableEntity invoiceCreated = jpaRepository.save(invoicePayableEntity);
+      InvoicePayableEntity invoiceCreated = jpaRepository.save(Objects.requireNonNull(invoicePayableEntity));
+      System.out.println("ID SALVO: " + invoiceCreated.getId() + " REPOSITORY ADAPTER");
       InvoicePayable invoiceMapped = mapper.toDomain(invoiceCreated);
         return invoiceMapped;
-    }
-
-
-    @Override
-    public Optional<InvoicePayable> findById(Long id) {
-        return jpaRepository.findById(id).map(mapper::toDomain);
     }
 
 

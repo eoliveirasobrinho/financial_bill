@@ -49,10 +49,12 @@ public class InvoicePayablePersistenceMapper {
         entity.getSupplierEntity().getEmail());
 
         return new InvoicePayable(
+            entity.getId(),
             entity.getDescription(),
             entity.getAmount(),
             entity.getDueDate(),
             entity.getCategory(),
+            entity.getStatus(),
             supplier
         );
     }

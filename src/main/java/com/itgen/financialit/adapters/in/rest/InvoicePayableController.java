@@ -1,10 +1,9 @@
 package com.itgen.financialit.adapters.in.rest;
 
 
-import static org.mockito.ArgumentMatchers.refEq;
-
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
-import com.itgen.financialit.application.port.in.GetAllInvoicesPayableUseCase;
 import com.itgen.financialit.application.service.CreateInvoicePayableService;
+import com.itgen.financialit.application.service.FindByIdInvoicePayableService;
 import com.itgen.financialit.application.service.GetAllInvoicesPayablesService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
@@ -37,16 +36,19 @@ public class InvoicePayableController {
     
     private final CreateInvoicePayableService createInvoicePayableService;
     private final GetAllInvoicesPayablesService getAllInvoicesPayableService;
+    private final FindByIdInvoicePayableService findByIdInvoicePayableService;
     private final InvoicePayableMapper mapper;
 
     public InvoicePayableController( 
         CreateInvoicePayableService createInvoicePayableService,
-        InvoicePayableMapper mapper,
-        GetAllInvoicesPayablesService getAllInvoicesPayableService
+        GetAllInvoicesPayablesService getAllInvoicesPayableService,
+        FindByIdInvoicePayableService findByIdInvoicePayableService,
+        InvoicePayableMapper mapper
     ) {
         
         this.createInvoicePayableService = createInvoicePayableService;
         this.getAllInvoicesPayableService = getAllInvoicesPayableService;
+        this.findByIdInvoicePayableService = findByIdInvoicePayableService;
         this.mapper = mapper;
         
     }
@@ -62,9 +64,17 @@ public class InvoicePayableController {
     @GetMapping("/all-invoices")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ResponseInvoicePayableDTO>> getInvoicesPayable(){
-        List<InvoicePayable> invoices = getAllInvoicesPayableService.getAllInvoicesPayableUseCase();
+        List<InvoicePayable> invoices = getAllInvoicesPayableService.getAllInvoicesPayable();
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponseList(invoices));
         
+    }
+
+    @GetMapping("/invoice/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ResponseInvoicePayableDTO> findById(@PathVariable long id) {
+        Optional<InvoicePayable> invoice = findByIdInvoicePayableService.findById(id);
+        InvoicePayable invoiceToReturn = invoice.get();
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(invoiceToReturn));
     }
 
     @PutMapping("/update/{id}")

@@ -20,22 +20,31 @@ public class InvoicePayable {
 
     
 
-    public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Category category, Supplier supplier) {
+    public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Category category,Status status, Supplier supplier) {
         this.description = description;
         this.amount = amount;
         this.dueDate = dueDate;
         this.category = category;
         this.supplier = supplier;
-        this.status = Status.PENDING;
+        this.status = status;
     }
 
-    public InvoicePayable(Long id, String description, BigDecimal amount, LocalDate dueDate, Category category, Supplier supplier) {
+    public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Category category,Supplier supplier){
+        this.description = description;
+        this.amount = amount;
+        this.dueDate = dueDate;
+        this.category = category;
+        this.supplier = supplier;
+    }
+
+    public InvoicePayable(Long id, String description, BigDecimal amount, LocalDate dueDate, Category category,Status status, Supplier supplier) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.dueDate = dueDate;
         this.category = category;
         this.supplier = supplier;
+        this.status = status;
     }
 
     // public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Supplier supplier) {

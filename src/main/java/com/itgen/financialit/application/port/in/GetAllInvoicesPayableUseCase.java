@@ -5,5 +5,5 @@ import java.util.List;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 public interface GetAllInvoicesPayableUseCase {
-    List<InvoicePayable> getAllInvoicesPayableUseCase();
+    List<InvoicePayable> getAllInvoicesPayable();
 }

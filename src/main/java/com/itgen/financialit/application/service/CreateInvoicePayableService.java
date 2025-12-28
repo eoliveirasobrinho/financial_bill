@@ -2,12 +2,15 @@ package com.itgen.financialit.application.service;
 
 
 
+import java.util.logging.Logger;
+
 import org.springframework.stereotype.Service;
 import com.itgen.financialit.application.port.in.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
+import com.itgen.financialit.domain.model.enums.Status;
 
 import jakarta.transaction.Transactional;
 
@@ -40,10 +43,12 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
             invoicePayable.getAmount(),
             invoicePayable.getDueDate(),
             invoicePayable.getCategory(),
+            Status.PENDING,
             supplier
         );
 
         InvoicePayable invoiceCreated = repository.save(invoiceToSave);
+        System.out.println("ID SALVO: " + invoiceCreated.getId() + " SERVICE");
         return invoiceCreated;
     }
 

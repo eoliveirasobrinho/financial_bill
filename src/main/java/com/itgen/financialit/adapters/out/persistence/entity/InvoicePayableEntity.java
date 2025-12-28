@@ -4,7 +4,6 @@ import com.itgen.financialit.domain.model.enums.Category;
 import com.itgen.financialit.domain.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "invoice_payable")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvoicePayableEntity {

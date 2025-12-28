@@ -1,6 +1,8 @@
 package com.itgen.financialit.adapters.out.persistence;
 
 import org.springframework.stereotype.Repository;
+
+import java.util.Objects;
 import java.util.Optional;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -25,13 +27,13 @@ public class PayInvoicePayableRepositoryAdapter implements PayInvoicePayableRepo
 
     @Override
     public Optional<InvoicePayable> findById(Long id) {
-       return jpaInvoicePayableRepository.findById(id).map(mapper::toDomain);
+       return jpaInvoicePayableRepository.findById(Objects.requireNonNull(id)).map(mapper::toDomain);
     }
 
     @Override
     public void save(InvoicePayable invoicePayable) {
         InvoicePayableEntity invoicePayableEntity = mapper.toEntity(invoicePayable);
-        jpaInvoicePayableRepository.save(invoicePayableEntity);
+        jpaInvoicePayableRepository.save(Objects.requireNonNull(invoicePayableEntity));
     }
 
     

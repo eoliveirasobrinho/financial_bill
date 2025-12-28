@@ -18,7 +18,7 @@ public class GetAllInvoicesPayablesService implements GetAllInvoicesPayableUseCa
     }
 
     @Override
-    public List<InvoicePayable> getAllInvoicesPayableUseCase() {
+    public List<InvoicePayable> getAllInvoicesPayable() {
         List<InvoicePayable> invoices = repositoryPort.getAllInvoicesPayables();
         if(invoices.isEmpty()){
             return List.of();

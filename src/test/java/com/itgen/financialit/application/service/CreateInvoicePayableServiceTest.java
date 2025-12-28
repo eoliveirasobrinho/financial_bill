@@ -19,6 +19,7 @@ import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 import com.itgen.financialit.domain.model.enums.Category;
+import com.itgen.financialit.domain.model.enums.Status;
 
 @ExtendWith(MockitoExtension.class)
 class CreateInvoicePayableServiceTest {
@@ -44,6 +45,7 @@ class CreateInvoicePayableServiceTest {
             new BigDecimal("250.00"),
             LocalDate.now().plusDays(10),
             Category.OTHER,
+            Status.PENDING,
             supplier
         );
     }
@@ -94,6 +96,7 @@ class CreateInvoicePayableServiceTest {
             new BigDecimal("120.00"),
             LocalDate.now().plusDays(5),
             Category.OTHER,
+            Status.PENDING,
             supplier
         );
 
