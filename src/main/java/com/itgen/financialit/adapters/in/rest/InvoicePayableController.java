@@ -72,9 +72,8 @@ public class InvoicePayableController {
     @GetMapping("/invoice/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseInvoicePayableDTO> findById(@PathVariable long id) {
-        Optional<InvoicePayable> invoice = findByIdInvoicePayableService.findById(id);
-        InvoicePayable invoiceToReturn = invoice.get();
-        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(invoiceToReturn));
+        InvoicePayable invoice = findByIdInvoicePayableService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(invoice));
     }
 
     @PutMapping("/update/{id}")

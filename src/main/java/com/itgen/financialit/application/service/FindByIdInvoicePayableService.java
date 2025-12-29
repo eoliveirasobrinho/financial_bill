@@ -19,13 +19,8 @@ public class FindByIdInvoicePayableService implements FindByIdInvoicePayableUseC
     }
 
     @Override
-    public Optional<InvoicePayable> findById(Long id) {
-        Optional<InvoicePayable> invoice = findByIdInvoicePayableRepositoryPort.findById(id);
-        if(invoice.get().getId() == null) {
-            throw new NoSuchElementException("there's no invoice created");
-        }
-
-        return invoice;
+    public InvoicePayable findById(Long id) {
+        return findByIdInvoicePayableRepositoryPort.findById(id).orElseThrow(() ->  new NoSuchElementException("Invoice was not founded with this ID"));
     }
 
 }

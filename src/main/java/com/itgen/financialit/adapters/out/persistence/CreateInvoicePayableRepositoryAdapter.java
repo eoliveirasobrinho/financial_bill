@@ -38,7 +38,6 @@ public class CreateInvoicePayableRepositoryAdapter implements CreateInvoicePayab
     public InvoicePayable save(InvoicePayable invoicePayable) {
       InvoicePayableEntity invoicePayableEntity = mapper.toEntity(invoicePayable);
       InvoicePayableEntity invoiceCreated = jpaRepository.save(Objects.requireNonNull(invoicePayableEntity));
-      System.out.println("ID SALVO: " + invoiceCreated.getId() + " REPOSITORY ADAPTER");
       InvoicePayable invoiceMapped = mapper.toDomain(invoiceCreated);
         return invoiceMapped;
     }

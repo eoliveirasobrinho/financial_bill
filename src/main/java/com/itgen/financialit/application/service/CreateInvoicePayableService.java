@@ -48,7 +48,6 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
         );
 
         InvoicePayable invoiceCreated = repository.save(invoiceToSave);
-        System.out.println("ID SALVO: " + invoiceCreated.getId() + " SERVICE");
         return invoiceCreated;
     }
 
