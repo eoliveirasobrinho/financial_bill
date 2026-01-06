@@ -105,6 +105,28 @@ public class InvoicePayable {
         return supplier;
     }
 
+    
+
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 
     public boolean isOverdue() {
         return status != Status.PAID && LocalDate.now().isAfter(dueDate);
