@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itgen.financialit.adapters.in.rest.dto.RequestSuplierDTO;
-import com.itgen.financialit.adapters.in.rest.dto.ResponseSupplierDTO;
+import com.itgen.financialit.adapters.in.rest.dto.request.RequestSuplierDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseSupplierDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.SupplierMapper;
 import com.itgen.financialit.application.service.CreateSupplierService;
 import com.itgen.financialit.domain.model.Supplier;

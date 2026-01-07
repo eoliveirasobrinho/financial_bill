@@ -3,7 +3,6 @@ package com.itgen.financialit.adapters.in.rest;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
-import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
 import com.itgen.financialit.application.service.CreateInvoicePayableService;
+import com.itgen.financialit.application.service.DeleteInvoicePayableService;
 import com.itgen.financialit.application.service.FindByIdInvoicePayableService;
 import com.itgen.financialit.application.service.GetAllInvoicesPayablesService;
+import com.itgen.financialit.application.service.UpdateInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,18 +38,24 @@ public class InvoicePayableController {
     private final CreateInvoicePayableService createInvoicePayableService;
     private final GetAllInvoicesPayablesService getAllInvoicesPayableService;
     private final FindByIdInvoicePayableService findByIdInvoicePayableService;
+    private final DeleteInvoicePayableService deleteInvoicePayableService;
+    private final UpdateInvoicePayableService updateInvoicePayableService;
     private final InvoicePayableMapper mapper;
 
     public InvoicePayableController( 
         CreateInvoicePayableService createInvoicePayableService,
         GetAllInvoicesPayablesService getAllInvoicesPayableService,
         FindByIdInvoicePayableService findByIdInvoicePayableService,
+        DeleteInvoicePayableService deleteInvoicePayableService,
+        UpdateInvoicePayableService updateInvoicePayableService,
         InvoicePayableMapper mapper
     ) {
         
         this.createInvoicePayableService = createInvoicePayableService;
         this.getAllInvoicesPayableService = getAllInvoicesPayableService;
         this.findByIdInvoicePayableService = findByIdInvoicePayableService;
+        this.deleteInvoicePayableService = deleteInvoicePayableService;
+        this.updateInvoicePayableService = updateInvoicePayableService;
         this.mapper = mapper;
         
     }
@@ -77,16 +84,18 @@ public class InvoicePayableController {
     }
 
     @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseInvoicePayableDTO> updateInvoicePayable(@PathVariable Long id, @RequestBody RequestInvoicePayableDTO requestDto) {
-        //TODO: process PUT request
+        InvoicePayable invoice = mapper.toDomain(requestDto);
+        InvoicePayable result = updateInvoicePayableService.updateInvoicePayable(invoice);
         
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(result));
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteInvoiceById(@PathVariable Long id) {
-       // TODO: process delete request
+       deleteInvoicePayableService.deleteInvoicePayable(id);
     }
 
     @PatchMapping("/pay/{id}")

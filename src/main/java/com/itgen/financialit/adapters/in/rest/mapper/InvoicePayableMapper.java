@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 
 import org.springframework.stereotype.Component;
 
-import com.itgen.financialit.adapters.in.rest.dto.RequestInvoicePayableDTO;
-import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
-import com.itgen.financialit.adapters.in.rest.dto.ResponseSupplierDTO;
+import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseSupplierDTO;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 

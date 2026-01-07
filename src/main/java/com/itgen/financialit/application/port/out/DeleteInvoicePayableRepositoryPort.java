@@ -1,8 +1,8 @@
-package com.itgen.financialit.application.port.in;
+package com.itgen.financialit.application.port.out;
 
 import com.itgen.financialit.domain.model.InvoicePayable;
 
-public interface DeleteInvoicePayableUseCase {
+public interface DeleteInvoicePayableRepositoryPort {
     void deleteInvoicePayable(Long id);
     InvoicePayable findById(Long id);
 }

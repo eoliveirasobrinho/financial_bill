@@ -2,8 +2,8 @@ package com.itgen.financialit.adapters.in.rest.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.itgen.financialit.adapters.in.rest.dto.RequestInvoiceReceivedDTO;
-import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoiceReceivedDTO;
+import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoiceReceivedDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoiceReceivedDTO;
 import com.itgen.financialit.domain.model.InvoiceReceived;
 
 

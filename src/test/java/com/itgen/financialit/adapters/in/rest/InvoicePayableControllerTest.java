@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.itgen.financialit.adapters.in.rest.dto.ResponseInvoicePayableDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
 import com.itgen.financialit.application.service.CreateInvoicePayableService;
 import com.itgen.financialit.application.service.PayInvoicePayableService;

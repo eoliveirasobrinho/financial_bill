@@ -1,4 +1,4 @@
-package com.itgen.financialit.adapters.in.rest.dto;
+package com.itgen.financialit.adapters.in.rest.dto.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.itgen.financialit.adapters.in.rest.dto;
+package com.itgen.financialit.adapters.in.rest.dto.request;
 
 public record RequestSuplierDTO(
     String name,

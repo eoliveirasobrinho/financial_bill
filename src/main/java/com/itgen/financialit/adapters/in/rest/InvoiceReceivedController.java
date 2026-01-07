@@ -2,7 +2,7 @@ package com.itgen.financialit.adapters.in.rest;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itgen.financialit.adapters.in.rest.dto.RequestInvoiceReceivedDTO;
+import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoiceReceivedDTO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.HttpStatus;

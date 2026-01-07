@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.itgen.financialit.adapters.in.rest.dto.ResponseSupplierDTO;
+import com.itgen.financialit.adapters.in.rest.dto.response.ResponseSupplierDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.SupplierMapper;
 import com.itgen.financialit.application.service.CreateSupplierService;
 import com.itgen.financialit.domain.model.Supplier;
