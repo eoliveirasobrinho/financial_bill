@@ -1,11 +1,7 @@
 package com.itgen.financialit.adapters.out.persistence;
 
 import java.util.Objects;
-import java.util.Optional;
-import java.util.logging.Logger;
 
-import org.hibernate.validator.internal.util.logging.Log;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
