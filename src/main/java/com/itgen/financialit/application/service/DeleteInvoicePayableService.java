@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.itgen.financialit.application.port.in.DeleteInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.DeleteInvoicePayableRepositoryPort;
+import com.itgen.financialit.domain.exception.invoice.InvoiceNotFoundException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 import jakarta.transaction.Transactional;
@@ -29,7 +30,7 @@ public class DeleteInvoicePayableService implements DeleteInvoicePayableUseCase{
         InvoicePayable invoice = repository.findById(id);
 
         if(invoice.getId() == null || invoice.getId() != id) {
-            throw new IllegalStateException("ID nulo ou inexistente");
+            throw new InvoiceNotFoundException(invoice.getId());
         }
 
         return invoice;

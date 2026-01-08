@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.itgen.financialit.application.port.in.UpdateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.UpdateInvoicePayableRepositoryPort;
+import com.itgen.financialit.domain.exception.invoice.InvoiceNotFoundException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 import jakarta.transaction.Transactional;
@@ -23,7 +24,7 @@ public class UpdateInvoicePayableService implements UpdateInvoicePayableUseCase{
     public InvoicePayable updateInvoicePayable(InvoicePayable invoicePayable) {
         InvoicePayable invoice = this.findById(invoicePayable.getId());
         if(invoice == null) {
-            throw new IllegalStateException("id não encontrada");
+            throw new InvoiceNotFoundException(invoice.getId());
         }
 
         invoice.setCategory(invoicePayable.getCategory());

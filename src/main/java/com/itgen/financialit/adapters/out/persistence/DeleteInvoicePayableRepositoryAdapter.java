@@ -6,6 +6,7 @@ import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntit
 import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
 import com.itgen.financialit.adapters.out.persistence.repository.JpaInvoicePayableRepository;
 import com.itgen.financialit.application.port.out.DeleteInvoicePayableRepositoryPort;
+import com.itgen.financialit.domain.exception.invoice.InvoiceNotFoundException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 @Repository
@@ -28,7 +29,7 @@ public class DeleteInvoicePayableRepositoryAdapter implements DeleteInvoicePayab
 
     @Override
     public InvoicePayable findById(Long id) {
-        InvoicePayableEntity invoice = jpaRepository.findById(id).orElseThrow(() -> new IllegalStateException("Conta não encontrada"));
+        InvoicePayableEntity invoice = jpaRepository.findById(id).orElseThrow(() -> new InvoiceNotFoundException(id));
         return mapper.toDomain(invoice);
     }
 

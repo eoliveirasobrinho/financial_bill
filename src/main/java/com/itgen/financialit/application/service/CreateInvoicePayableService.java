@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itgen.financialit.application.port.in.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.domain.exception.invoice.InvoiceAlreadyCreatedException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 import com.itgen.financialit.domain.model.enums.Status;
@@ -35,7 +36,7 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
         Supplier supplier = repositorySupplier.findById(invoicePayable.getSupplier().getId()).orElseThrow(() -> new IllegalStateException("Supplier was not created"));
 
         if(invoicePayable.getId() != null) {
-            throw new IllegalStateException("Invoice already has an ID and cannot be created");
+            throw new InvoiceAlreadyCreatedException(" Conta já criada para este ID");
         }
         
         InvoicePayable invoiceToSave = new InvoicePayable(
