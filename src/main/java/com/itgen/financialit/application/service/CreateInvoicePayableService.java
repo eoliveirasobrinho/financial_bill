@@ -1,9 +1,6 @@
 package com.itgen.financialit.application.service;
 
 
-
-import java.util.logging.Logger;
-
 import org.springframework.stereotype.Service;
 import com.itgen.financialit.application.port.in.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
