@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
 import com.itgen.financialit.adapters.out.persistence.entity.SupplierEntity;
-import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 
 @Component
