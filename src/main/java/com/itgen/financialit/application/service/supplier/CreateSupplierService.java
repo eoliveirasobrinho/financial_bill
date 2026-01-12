@@ -1,4 +1,4 @@
-package com.itgen.financialit.application.service;
+package com.itgen.financialit.application.service.supplier;
 
 import org.springframework.stereotype.Service;
 
@@ -6,6 +6,8 @@ import com.itgen.financialit.application.port.in.CreateSupplierUseCase;
 import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.exception.supplier.SupplierAlreadyExistsException;
 import com.itgen.financialit.domain.model.Supplier;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class CreateSupplierService implements CreateSupplierUseCase{
@@ -17,6 +19,7 @@ public class CreateSupplierService implements CreateSupplierUseCase{
     }
 
     @Override
+    @Transactional
     public Supplier createSupplier(Supplier supplier) {
         if(supplier.getId() != null) {
             throw new SupplierAlreadyExistsException(supplier.getId());

@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.service.supplier.CreateSupplierService;
 import com.itgen.financialit.domain.model.Supplier;
 
 @ExtendWith(MockitoExtension.class)

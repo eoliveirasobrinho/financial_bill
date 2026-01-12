@@ -1,4 +1,4 @@
-package com.itgen.financialit.application.service;
+package com.itgen.financialit.application.service.invoice;
 
 import java.util.List;
 

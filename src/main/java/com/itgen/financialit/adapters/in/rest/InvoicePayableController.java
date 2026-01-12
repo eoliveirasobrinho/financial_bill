@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
-import com.itgen.financialit.application.service.CreateInvoicePayableService;
-import com.itgen.financialit.application.service.DeleteInvoicePayableService;
-import com.itgen.financialit.application.service.FindByIdInvoicePayableService;
-import com.itgen.financialit.application.service.GetAllInvoicesPayablesService;
-import com.itgen.financialit.application.service.UpdateInvoicePayableService;
+import com.itgen.financialit.application.service.invoice.CreateInvoicePayableService;
+import com.itgen.financialit.application.service.invoice.DeleteInvoicePayableService;
+import com.itgen.financialit.application.service.invoice.FindByIdInvoicePayableService;
+import com.itgen.financialit.application.service.invoice.GetAllInvoicesPayablesService;
+import com.itgen.financialit.application.service.invoice.UpdateInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 import org.springframework.web.bind.annotation.PutMapping;

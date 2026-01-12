@@ -18,8 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
-import com.itgen.financialit.application.service.CreateInvoicePayableService;
 import com.itgen.financialit.application.service.PayInvoicePayableService;
+import com.itgen.financialit.application.service.invoice.CreateInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 @WebMvcTest(InvoicePayableController.class)

@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.service.invoice.CreateInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 import com.itgen.financialit.domain.model.enums.Category;

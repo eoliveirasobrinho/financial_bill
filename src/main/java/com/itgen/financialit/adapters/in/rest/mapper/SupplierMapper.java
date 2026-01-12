@@ -1,5 +1,7 @@
 package com.itgen.financialit.adapters.in.rest.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.itgen.financialit.adapters.in.rest.dto.request.RequestSuplierDTO;
@@ -25,4 +27,14 @@ public class SupplierMapper {
             domain.getEmail()
         );
     }
+
+    public List<ResponseSupplierDTO> toResponseList(List<Supplier> list) {
+        if(list == null) {
+            return List.of();
+        }
+
+        return list.stream().map(this::toResponse).toList();
+    }
+
+    
 }
