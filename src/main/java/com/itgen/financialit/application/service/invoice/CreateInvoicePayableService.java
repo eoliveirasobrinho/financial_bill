@@ -1,6 +1,9 @@
 package com.itgen.financialit.application.service.invoice;
 
 
+import java.util.Random;
+
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.itgen.financialit.application.port.in.invoice.CreateInvoicePayableUseCase;
@@ -19,18 +22,24 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
 
     private final CreateInvoicePayableRepositoryPort repository;
     private final CreateSupplierRepositoryPort repositorySupplier;
+    private final KafkaTemplate<String, InvoicePayable> kafkaTemplateOrder;
+
 
     public CreateInvoicePayableService(
         CreateInvoicePayableRepositoryPort repository,
-        CreateSupplierRepositoryPort repositorySupplier
+        CreateSupplierRepositoryPort repositorySupplier,
+        KafkaTemplate<String,InvoicePayable> kafkaTemplateOrder
     ){
         this.repository = repository;
-        this.repositorySupplier = repositorySupplier;  
+        this.repositorySupplier = repositorySupplier;
+        this.kafkaTemplateOrder = kafkaTemplateOrder;  
     }
 
     @Override
     @Transactional
+    @SuppressWarnings("null")
     public InvoicePayable createInvoicePayable(InvoicePayable invoicePayable) {
+
         Supplier supplier = repositorySupplier.findById(invoicePayable.getSupplier().getId()).orElseThrow(() -> new IllegalStateException("Supplier was not created"));
 
         if(invoicePayable.getId() != null) {
@@ -47,6 +56,7 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
         );
 
         InvoicePayable invoiceCreated = repository.save(invoiceToSave);
+        kafkaTemplateOrder.send("Invoice-payable-created-order-processed", invoiceCreated);
         return invoiceCreated;
     }
 
