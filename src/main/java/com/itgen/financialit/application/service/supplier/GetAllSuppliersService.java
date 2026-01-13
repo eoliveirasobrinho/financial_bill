@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.port.in.GetAllSuppliersUseCase;
-import com.itgen.financialit.application.port.out.GetAllSuppliersRepositoryPort;
+import com.itgen.financialit.application.port.in.supplier.GetAllSuppliersUseCase;
+import com.itgen.financialit.application.port.out.supplier.GetAllSuppliersRepositoryPort;
 import com.itgen.financialit.domain.model.Supplier;
 
 @Service

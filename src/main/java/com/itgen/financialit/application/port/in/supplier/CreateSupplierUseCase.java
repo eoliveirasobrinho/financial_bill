@@ -1,4 +1,4 @@
-package com.itgen.financialit.application.port.in;
+package com.itgen.financialit.application.port.in.supplier;
 
 import com.itgen.financialit.domain.model.Supplier;
 

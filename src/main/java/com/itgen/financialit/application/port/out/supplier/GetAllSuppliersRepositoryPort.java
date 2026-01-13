@@ -1,4 +1,4 @@
-package com.itgen.financialit.application.port.out;
+package com.itgen.financialit.application.port.out.supplier;
 
 import java.util.List;
 

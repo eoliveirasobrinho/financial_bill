@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.itgen.financialit.application.port.out.DeleteInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.invoice.DeleteInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.service.invoice.DeleteInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 

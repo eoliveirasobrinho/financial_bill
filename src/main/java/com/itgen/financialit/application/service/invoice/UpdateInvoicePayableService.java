@@ -3,8 +3,8 @@ package com.itgen.financialit.application.service.invoice;
 
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.port.in.UpdateInvoicePayableUseCase;
-import com.itgen.financialit.application.port.out.UpdateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.in.invoice.UpdateInvoicePayableUseCase;
+import com.itgen.financialit.application.port.out.invoice.UpdateInvoicePayableRepositoryPort;
 import com.itgen.financialit.domain.exception.invoice.InvoiceNotFoundException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 

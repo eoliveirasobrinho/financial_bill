@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.itgen.financialit.adapters.out.persistence.entity.SupplierEntity;
 import com.itgen.financialit.adapters.out.persistence.mapper.SupplierPersistenceMapper;
 import com.itgen.financialit.adapters.out.persistence.repository.JpaSupplierRepository;
-import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.model.Supplier;
 
 import jakarta.transaction.Transactional;

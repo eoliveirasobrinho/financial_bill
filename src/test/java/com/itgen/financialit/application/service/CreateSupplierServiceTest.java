@@ -1,6 +1,7 @@
 package com.itgen.financialit.application.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.application.service.supplier.CreateSupplierService;
+import com.itgen.financialit.domain.exception.supplier.SupplierAlreadyExistsException;
 import com.itgen.financialit.domain.model.Supplier;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,12 +51,12 @@ class CreateSupplierServiceTest {
         supplier.setName("Fornecedor Existente");
 
         // act & assert
-        IllegalStateException exception = assertThrows(
-            IllegalStateException.class,
+        SupplierAlreadyExistsException exception = assertThrows(
+            SupplierAlreadyExistsException.class,
             () -> service.createSupplier(supplier)
         );
 
-        assertEquals("Supplier Already Exists ", exception.getMessage());
+        assertEquals("Não foi possível criar o fornecedor ! Fornecedor já criado! ID: " + 1, exception.getMessage());
 
         verify(repository, never()).save(any());
     }

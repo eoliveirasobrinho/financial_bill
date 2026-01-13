@@ -2,8 +2,8 @@ package com.itgen.financialit.application.service.supplier;
 
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.port.in.UpdateSupplierUseCase;
-import com.itgen.financialit.application.port.out.UpdateSupplierRepositoryPort;
+import com.itgen.financialit.application.port.in.supplier.UpdateSupplierUseCase;
+import com.itgen.financialit.application.port.out.supplier.UpdateSupplierRepositoryPort;
 import com.itgen.financialit.domain.exception.supplier.SupplierNotFoundException;
 import com.itgen.financialit.domain.model.Supplier;
 

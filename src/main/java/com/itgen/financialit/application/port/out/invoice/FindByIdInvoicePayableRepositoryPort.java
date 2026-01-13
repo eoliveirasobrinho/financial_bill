@@ -1,4 +1,4 @@
-package com.itgen.financialit.application.port.out;
+package com.itgen.financialit.application.port.out.invoice;
 
 import java.util.Optional;
 

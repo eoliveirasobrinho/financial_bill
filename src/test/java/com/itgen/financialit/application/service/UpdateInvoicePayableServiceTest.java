@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.itgen.financialit.application.port.out.UpdateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.invoice.UpdateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.service.invoice.UpdateInvoicePayableService;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;

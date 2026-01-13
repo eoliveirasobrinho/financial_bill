@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.port.in.GetAllInvoicesPayableUseCase;
-import com.itgen.financialit.application.port.out.GetAllInvoicesPayablesRepositoryPort;
+import com.itgen.financialit.application.port.in.invoice.GetAllInvoicesPayableUseCase;
+import com.itgen.financialit.application.port.out.invoice.GetAllInvoicesPayablesRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 @Service

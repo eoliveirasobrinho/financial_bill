@@ -8,8 +8,7 @@ import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntit
 import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
 
 import com.itgen.financialit.adapters.out.persistence.repository.JpaInvoicePayableRepository;
-
-import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 @Repository

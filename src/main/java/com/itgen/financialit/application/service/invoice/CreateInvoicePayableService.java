@@ -2,9 +2,10 @@ package com.itgen.financialit.application.service.invoice;
 
 
 import org.springframework.stereotype.Service;
-import com.itgen.financialit.application.port.in.CreateInvoicePayableUseCase;
-import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
-import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+
+import com.itgen.financialit.application.port.in.invoice.CreateInvoicePayableUseCase;
+import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.exception.invoice.InvoiceAlreadyCreatedException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;

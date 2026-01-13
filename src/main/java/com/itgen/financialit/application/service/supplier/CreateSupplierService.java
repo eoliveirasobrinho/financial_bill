@@ -2,8 +2,8 @@ package com.itgen.financialit.application.service.supplier;
 
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.port.in.CreateSupplierUseCase;
-import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.port.in.supplier.CreateSupplierUseCase;
+import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.exception.supplier.SupplierAlreadyExistsException;
 import com.itgen.financialit.domain.model.Supplier;
 

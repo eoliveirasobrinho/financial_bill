@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
 import com.itgen.financialit.adapters.out.persistence.mapper.InvoicePayablePersistenceMapper;
 import com.itgen.financialit.adapters.out.persistence.repository.JpaInvoicePayableRepository;
-import com.itgen.financialit.application.port.out.GetAllInvoicesPayablesRepositoryPort;
+import com.itgen.financialit.application.port.out.invoice.GetAllInvoicesPayablesRepositoryPort;
 import com.itgen.financialit.domain.model.InvoicePayable;
 
 @Repository

@@ -1,6 +1,7 @@
 package com.itgen.financialit.application.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
@@ -14,9 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.itgen.financialit.application.port.out.CreateInvoicePayableRepositoryPort;
-import com.itgen.financialit.application.port.out.CreateSupplierRepositoryPort;
+import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.application.service.invoice.CreateInvoicePayableService;
+import com.itgen.financialit.domain.exception.invoice.InvoiceAlreadyCreatedException;
 import com.itgen.financialit.domain.model.InvoicePayable;
 import com.itgen.financialit.domain.model.Supplier;
 import com.itgen.financialit.domain.model.enums.Category;
@@ -107,13 +109,13 @@ class CreateInvoicePayableServiceTest {
             .thenReturn(Optional.of(supplier));
 
         // act & assert
-        IllegalStateException exception = assertThrows(
-            IllegalStateException.class,
+        InvoiceAlreadyCreatedException exception = assertThrows(
+            InvoiceAlreadyCreatedException.class,
             () -> service.createInvoicePayable(invoiceWithId)
         );
 
         assertEquals(
-            "Invoice already has an ID and cannot be created",
+            " Conta já criada para este ID",
             exception.getMessage()
         );
 
