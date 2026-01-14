@@ -1,0 +1,33 @@
+package com.itgen.financialit.adapters.out.persistence.adapters.supplier;
+
+import org.springframework.stereotype.Repository;
+
+import com.itgen.financialit.adapters.out.persistence.entity.SupplierEntity;
+import com.itgen.financialit.adapters.out.persistence.mapper.SupplierPersistenceMapper;
+import com.itgen.financialit.adapters.out.persistence.repository.JpaSupplierRepository;
+import com.itgen.financialit.application.port.out.supplier.GetSupplierByIdRepositoryPort;
+import com.itgen.financialit.domain.exception.supplier.SupplierNotFoundException;
+import com.itgen.financialit.domain.model.Supplier;
+
+@Repository
+public class GetSupplierByIdRepositoryAdapter implements GetSupplierByIdRepositoryPort{
+
+    private final JpaSupplierRepository repository;
+    private final SupplierPersistenceMapper mapper;
+
+    
+
+    public GetSupplierByIdRepositoryAdapter(JpaSupplierRepository repository, SupplierPersistenceMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
+
+
+    @Override
+    public Supplier findById(Long id) {
+        SupplierEntity result = repository.findById(id).orElseThrow( () -> new SupplierNotFoundException(id));
+        return mapper.toDomain(result);
+    }
+
+}

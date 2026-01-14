@@ -9,6 +9,7 @@ import com.itgen.financialit.adapters.in.rest.dto.response.ResponseSupplierDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.SupplierMapper;
 import com.itgen.financialit.application.service.supplier.CreateSupplierService;
 import com.itgen.financialit.application.service.supplier.GetAllSuppliersService;
+import com.itgen.financialit.application.service.supplier.GetSupplierByIdService;
 import com.itgen.financialit.application.service.supplier.UpdateSupplierService;
 import com.itgen.financialit.domain.model.Supplier;
 
@@ -30,13 +31,21 @@ public class SupplierController {
     private final CreateSupplierService createService;
     private final GetAllSuppliersService getAllSuppliersService;
     private final UpdateSupplierService updateSupplierService;
+    private final GetSupplierByIdService getSupplierByIdService;
     private final SupplierMapper mapper;
 
-    public SupplierController(CreateSupplierService createService, SupplierMapper mapper, GetAllSuppliersService getAllSuppliersService, UpdateSupplierService updateSupplierService) {
+    public SupplierController(
+        CreateSupplierService createService, 
+        SupplierMapper mapper, 
+        GetAllSuppliersService getAllSuppliersService, 
+        UpdateSupplierService updateSupplierService, 
+        GetSupplierByIdService getSupplierByIdService) {
+            
         this.mapper = mapper;
         this.createService = createService;
         this.getAllSuppliersService = getAllSuppliersService;
         this.updateSupplierService = updateSupplierService;
+        this.getSupplierByIdService = getSupplierByIdService;
     }
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,6 +73,12 @@ public class SupplierController {
         Supplier supplier = updateSupplierService.updateSupplier(result);
         ResponseSupplierDTO response = mapper.toResponse(supplier);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseSupplierDTO> getSupplierById(@PathVariable Long id) {
+        Supplier result = getSupplierByIdService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(result));
     }
     
 }

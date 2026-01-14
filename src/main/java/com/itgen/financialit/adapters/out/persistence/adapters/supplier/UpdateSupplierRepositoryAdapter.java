@@ -1,4 +1,4 @@
-package com.itgen.financialit.adapters.out.persistence;
+package com.itgen.financialit.adapters.out.persistence.adapters.supplier;
 
 import org.springframework.stereotype.Repository;
 
