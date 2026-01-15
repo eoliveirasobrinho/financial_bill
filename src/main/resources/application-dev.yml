@@ -12,6 +12,11 @@ spring:
     password: postgres8725
 
   kafka:
+    admin:
+      fail-fast: false
+    properties:
+      request.timeout.ms: 60000
+      default.api.timeout.ms: 60000
     bootstrap-servers: localhost:9092
 
     producer:
@@ -22,7 +27,9 @@ spring:
       group-id: financeiro-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
 
     listener:
       ack-mode: manual
