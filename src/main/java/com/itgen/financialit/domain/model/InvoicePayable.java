@@ -47,13 +47,6 @@ public class InvoicePayable {
         this.status = status;
     }
 
-    // public InvoicePayable(String description, BigDecimal amount, LocalDate dueDate, Supplier supplier) {
-    //     this.description = description;
-    //     this.amount = amount;
-    //     this.dueDate = dueDate;
-    //     this.supplier = supplier;
-    // }
-
     
     public InvoicePayable(){}
    
@@ -130,15 +123,6 @@ public class InvoicePayable {
 
     public boolean isOverdue() {
         return status != Status.PAID && LocalDate.now().isAfter(dueDate);
-    }
-
-    public void pay(LocalDate paymentDate) {
-        if(this.status == Status.PAID) {
-            throw new IllegalStateException(" Conta já paga");
-        }
-
-        this.status = Status.PAID;
-        this.paymentDate = paymentDate;
     }
 
     @Override
