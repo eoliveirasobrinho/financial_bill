@@ -3,6 +3,8 @@ package com.itgen.financialit.adapters.in.rest;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,6 +41,8 @@ public class InvoicePayableController {
     private final DeleteInvoicePayableService deleteInvoicePayableService;
     private final UpdateInvoicePayableService updateInvoicePayableService;
     private final InvoicePayableMapper mapper;
+
+    private final Logger log = LoggerFactory.getLogger(InvoicePayableController.class);
 
     public InvoicePayableController( 
         CreateInvoicePayableService createInvoicePayableService,
