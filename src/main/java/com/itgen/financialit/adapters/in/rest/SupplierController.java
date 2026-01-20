@@ -53,7 +53,6 @@ public class SupplierController {
         this.deleteSupplierService = deleteSupplierService;
     }
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseSupplierDTO> createSupplier(@RequestBody RequestSuplierDTO requestSupplierDTO) {
         Supplier supplier = mapper.toDomain(requestSupplierDTO);
         Supplier supplierToMapper = createService.createSupplier(supplier);
@@ -62,7 +61,6 @@ public class SupplierController {
     }
 
     @GetMapping("/suppliers")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ResponseSupplierDTO>> getAllSuppliers(){
         List<Supplier> list = getAllSuppliersService.getAllSuppliers();
         List<ResponseSupplierDTO> suppliers = mapper.toResponseList(list);
@@ -72,7 +70,6 @@ public class SupplierController {
 
 
     @PutMapping("/update/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseSupplierDTO> updateSupplier(@PathVariable Long id, @RequestBody RequestSuplierDTO dto) {
         Supplier result = mapper.toDomain(dto);
         Supplier supplier = updateSupplierService.updateSupplier(result);
@@ -87,7 +84,6 @@ public class SupplierController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteSupplier(@PathVariable Long id) {
         deleteSupplierService.deleteSupplier(id);
     }

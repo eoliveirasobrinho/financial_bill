@@ -2,6 +2,8 @@ package com.itgen.financialit.adapters.out.persistence.adapters.supplier;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +18,7 @@ public class GetAllSuppliersRepositoryAdapter implements GetAllSuppliersReposito
 
     private final JpaSupplierRepository jpaRepository;
     private final SupplierPersistenceMapper mapper;
-
+    private Logger log = LoggerFactory.getLogger(GetAllSuppliersRepositoryAdapter.class);
     
 
     public GetAllSuppliersRepositoryAdapter(JpaSupplierRepository jpaRepository, SupplierPersistenceMapper mapper) {
@@ -30,7 +32,10 @@ public class GetAllSuppliersRepositoryAdapter implements GetAllSuppliersReposito
     @Cacheable(value = "supplier")
     public List<Supplier> getAllSuppliers() {
         List<SupplierEntity> suppliersList = jpaRepository.findAll();
+        log.info("GETTING SUPPLIERS: {} ", suppliersList);
         List<Supplier> supplier = mapper.toDomainList(suppliersList);
+        // Long time = System.currentTimeMillis();
+        // log.info("GET ALL SUPPLIERS - TIME PROCESSED:  {}", System.currentTimeMillis());
         return supplier;
     }
 
