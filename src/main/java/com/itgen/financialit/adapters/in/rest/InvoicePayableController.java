@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itgen.financialit.adapters.in.rest.cache.GetAllInvoicesPayableQueryCache;
 import com.itgen.financialit.adapters.in.rest.dto.request.RequestInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.dto.response.ResponseInvoicePayableDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.InvoicePayableMapper;
@@ -36,13 +38,12 @@ public class InvoicePayableController {
     
     
     private final CreateInvoicePayableService createInvoicePayableService;
-    private final GetAllInvoicesPayablesService getAllInvoicesPayableService;
     private final FindByIdInvoicePayableService findByIdInvoicePayableService;
     private final DeleteInvoicePayableService deleteInvoicePayableService;
     private final UpdateInvoicePayableService updateInvoicePayableService;
+    private final GetAllInvoicesPayableQueryCache getAllInvoicesQueryCache;
     private final InvoicePayableMapper mapper;
 
-    private final Logger log = LoggerFactory.getLogger(InvoicePayableController.class);
 
     public InvoicePayableController( 
         CreateInvoicePayableService createInvoicePayableService,
@@ -50,20 +51,20 @@ public class InvoicePayableController {
         FindByIdInvoicePayableService findByIdInvoicePayableService,
         DeleteInvoicePayableService deleteInvoicePayableService,
         UpdateInvoicePayableService updateInvoicePayableService,
+        GetAllInvoicesPayableQueryCache getAllInvoicesQueryCache,
         InvoicePayableMapper mapper
     ) {
         
         this.createInvoicePayableService = createInvoicePayableService;
-        this.getAllInvoicesPayableService = getAllInvoicesPayableService;
         this.findByIdInvoicePayableService = findByIdInvoicePayableService;
         this.deleteInvoicePayableService = deleteInvoicePayableService;
         this.updateInvoicePayableService = updateInvoicePayableService;
+        this.getAllInvoicesQueryCache = getAllInvoicesQueryCache;
         this.mapper = mapper;
         
     }
 
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseInvoicePayableDTO> createInvoiceToPay(@RequestBody RequestInvoicePayableDTO requestDto) {
         InvoicePayable invoice = mapper.toDomain(requestDto); 
         InvoicePayable invoiceCreated = createInvoicePayableService.createInvoicePayable(invoice);
@@ -71,22 +72,18 @@ public class InvoicePayableController {
     }
 
     @GetMapping("/all-invoices")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ResponseInvoicePayableDTO>> getInvoicesPayable(){
-        List<InvoicePayable> invoices = getAllInvoicesPayableService.getAllInvoicesPayable();
-        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponseList(invoices));
+        return ResponseEntity.ok(getAllInvoicesQueryCache.getAllInvoicesPayableCached());
         
     }
 
     @GetMapping("/invoice/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseInvoicePayableDTO> findById(@PathVariable long id) {
         InvoicePayable invoice = findByIdInvoicePayableService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(invoice));
     }
 
     @PutMapping("/update/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseInvoicePayableDTO> updateInvoicePayable(@PathVariable Long id, @RequestBody RequestInvoicePayableDTO requestDto) {
         InvoicePayable invoice = mapper.toDomain(requestDto);
         InvoicePayable result = updateInvoicePayableService.updateInvoicePayable(invoice);
@@ -95,11 +92,9 @@ public class InvoicePayableController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteInvoiceById(@PathVariable Long id) {
        deleteInvoicePayableService.deleteInvoicePayable(id);
     }
    
-    
     
 }

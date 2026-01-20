@@ -2,9 +2,6 @@ package com.itgen.financialit.adapters.out.persistence.adapters.invoicePayable;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -18,13 +15,13 @@ public class GetAllInvoicesPayablesRepositoryAdapter implements GetAllInvoicesPa
     private final JpaInvoicePayableRepository jpaInvoicePayableRepository;
     private final InvoicePayablePersistenceMapper mapper;
 
+
     public GetAllInvoicesPayablesRepositoryAdapter(JpaInvoicePayableRepository jpaInvoicePayableRepository, InvoicePayablePersistenceMapper mapper) {
         this.jpaInvoicePayableRepository = jpaInvoicePayableRepository;
         this.mapper = mapper;
     }
 
     @Override
-    @Cacheable(value = "invoicePayable")
     public List<InvoicePayable> getAllInvoicesPayables() {
         List<InvoicePayableEntity> invoices = jpaInvoicePayableRepository.findAll();
         List<InvoicePayable> invoicesMapped = mapper.toDomainList(invoices);
