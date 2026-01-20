@@ -24,7 +24,6 @@ public class RedisCacheConfig {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Datas Java 8+
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
