@@ -1,5 +1,6 @@
 package com.itgen.financialit.adapters.out.persistence.adapters.supplier;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.SupplierEntity;
@@ -25,6 +26,7 @@ public class GetSupplierByIdRepositoryAdapter implements GetSupplierByIdReposito
 
 
     @Override
+    @Cacheable(value = "supplier", key = "#id")
     public Supplier findById(Long id) {
         SupplierEntity result = repository.findById(id).orElseThrow( () -> new SupplierNotFoundException(id));
         return mapper.toDomain(result);

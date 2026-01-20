@@ -1,5 +1,8 @@
 package com.itgen.financialit.adapters.out.persistence.adapters.invoicePayable;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -21,6 +24,7 @@ public class DeleteInvoicePayableRepositoryAdapter implements DeleteInvoicePayab
     }
 
     @Override
+    @CacheEvict(value = "invoicePayable", allEntries = true)
     public void deleteInvoicePayable(Long id) {
         InvoicePayable invoice = this.findById(id);
         InvoicePayableEntity deleteInvoice = mapper.toEntity(invoice);
@@ -28,6 +32,7 @@ public class DeleteInvoicePayableRepositoryAdapter implements DeleteInvoicePayab
     }
 
     @Override
+    @Cacheable(value = "invoicePayable", key = "#id")
     public InvoicePayable findById(Long id) {
         InvoicePayableEntity invoice = jpaRepository.findById(id).orElseThrow(() -> new InvoiceNotFoundException(id));
         return mapper.toDomain(invoice);

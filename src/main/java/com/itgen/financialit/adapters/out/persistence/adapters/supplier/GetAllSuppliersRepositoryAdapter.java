@@ -2,6 +2,7 @@ package com.itgen.financialit.adapters.out.persistence.adapters.supplier;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.SupplierEntity;
@@ -26,6 +27,7 @@ public class GetAllSuppliersRepositoryAdapter implements GetAllSuppliersReposito
 
 
     @Override
+    @Cacheable(value = "supplier")
     public List<Supplier> getAllSuppliers() {
         List<SupplierEntity> suppliersList = jpaRepository.findAll();
         List<Supplier> supplier = mapper.toDomainList(suppliersList);

@@ -33,6 +33,10 @@ spring:
 
     listener:
       ack-mode: manual
-
+  cache:
+    type: redis
+  data:
+    redis:
+      port: 6379
 server:
   port: 8080

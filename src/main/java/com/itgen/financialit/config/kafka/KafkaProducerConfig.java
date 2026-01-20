@@ -1,4 +1,4 @@
-package com.itgen.financialit.config;
+package com.itgen.financialit.config.kafka;
 
 import java.util.HashMap;
 import java.util.Map;

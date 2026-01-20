@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -23,6 +24,7 @@ public class FindbyIdInvoicePayableRepositoryAdapter implements FindByIdInvoiceP
         this.mapper = mapper;
     }
     @Override
+    @Cacheable(value = "invoicePayable", key="#id")
     public Optional<InvoicePayable> findById(Long id) {
         Optional<InvoicePayableEntity> invoiceEntity = jpaInvoicePayableRepository.findById(Objects.requireNonNull(id));
         if(invoiceEntity.isEmpty()) {

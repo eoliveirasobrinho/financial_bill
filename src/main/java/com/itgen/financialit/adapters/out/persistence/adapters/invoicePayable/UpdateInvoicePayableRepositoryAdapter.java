@@ -1,6 +1,8 @@
 package com.itgen.financialit.adapters.out.persistence.adapters.invoicePayable;
 
 
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -21,6 +23,7 @@ public class UpdateInvoicePayableRepositoryAdapter implements UpdateInvoicePayab
     }
 
     @Override
+    @CachePut(value = "invoicePayable", key = "#invoicePayable.id")
     public InvoicePayable update(InvoicePayable invoicePayable) {
        InvoicePayableEntity entity = mapper.toEntity(invoicePayable);
        InvoicePayableEntity saved = jpaInvoicePayableRepository.save(entity);
@@ -29,6 +32,7 @@ public class UpdateInvoicePayableRepositoryAdapter implements UpdateInvoicePayab
     }
 
     @Override
+    @Cacheable(value = "invoicePayable", key = "#id")
     public InvoicePayable findById(Long id) {
         InvoicePayableEntity entity = jpaInvoicePayableRepository.findById(id).orElseThrow(() -> new IllegalStateException("id não encontrado ou nulo"));
         return mapper.toDomain(entity);

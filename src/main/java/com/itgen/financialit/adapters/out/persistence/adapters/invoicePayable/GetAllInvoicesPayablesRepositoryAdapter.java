@@ -2,6 +2,7 @@ package com.itgen.financialit.adapters.out.persistence.adapters.invoicePayable;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.itgen.financialit.adapters.out.persistence.entity.InvoicePayableEntity;
@@ -21,6 +22,7 @@ public class GetAllInvoicesPayablesRepositoryAdapter implements GetAllInvoicesPa
     }
 
     @Override
+    @Cacheable(value = "invoicePayable")
     public List<InvoicePayable> getAllInvoicesPayables() {
         List<InvoicePayableEntity> invoices = jpaInvoicePayableRepository.findAll();
         List<InvoicePayable> invoicesMapped = mapper.toDomainList(invoices);

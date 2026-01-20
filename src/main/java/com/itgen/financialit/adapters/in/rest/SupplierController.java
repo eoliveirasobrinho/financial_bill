@@ -8,6 +8,7 @@ import com.itgen.financialit.adapters.in.rest.dto.request.RequestSuplierDTO;
 import com.itgen.financialit.adapters.in.rest.dto.response.ResponseSupplierDTO;
 import com.itgen.financialit.adapters.in.rest.mapper.SupplierMapper;
 import com.itgen.financialit.application.service.supplier.CreateSupplierService;
+import com.itgen.financialit.application.service.supplier.DeleteSupplierService;
 import com.itgen.financialit.application.service.supplier.GetAllSuppliersService;
 import com.itgen.financialit.application.service.supplier.GetSupplierByIdService;
 import com.itgen.financialit.application.service.supplier.UpdateSupplierService;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +34,7 @@ public class SupplierController {
     private final GetAllSuppliersService getAllSuppliersService;
     private final UpdateSupplierService updateSupplierService;
     private final GetSupplierByIdService getSupplierByIdService;
+    private final DeleteSupplierService deleteSupplierService;
     private final SupplierMapper mapper;
 
     public SupplierController(
@@ -39,13 +42,15 @@ public class SupplierController {
         SupplierMapper mapper, 
         GetAllSuppliersService getAllSuppliersService, 
         UpdateSupplierService updateSupplierService, 
-        GetSupplierByIdService getSupplierByIdService) {
+        GetSupplierByIdService getSupplierByIdService,
+        DeleteSupplierService deleteSupplierService) {
             
         this.mapper = mapper;
         this.createService = createService;
         this.getAllSuppliersService = getAllSuppliersService;
         this.updateSupplierService = updateSupplierService;
         this.getSupplierByIdService = getSupplierByIdService;
+        this.deleteSupplierService = deleteSupplierService;
     }
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -79,6 +84,12 @@ public class SupplierController {
     public ResponseEntity<ResponseSupplierDTO> getSupplierById(@PathVariable Long id) {
         Supplier result = getSupplierByIdService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(result));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteSupplier(@PathVariable Long id) {
+        deleteSupplierService.deleteSupplier(id);
     }
     
 }
