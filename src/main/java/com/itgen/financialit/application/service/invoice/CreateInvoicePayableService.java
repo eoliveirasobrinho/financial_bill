@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.application.metrics.invoice.InvoicePayableCreatedMetrics;
+import com.itgen.financialit.adapters.out.metrics.invoice.MicrometerInvoicePayableCreatedMetricsAdapter;
 import com.itgen.financialit.application.port.in.invoice.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
@@ -27,14 +27,14 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
     private final CreateSupplierRepositoryPort repositorySupplier;
     private final KafkaTemplate<String, InvoicePayable> kafkaTemplateOrder;
     private final Logger log = LoggerFactory.getLogger(CreateInvoicePayableService.class);
-    private final InvoicePayableCreatedMetrics metrics;
+    private final MicrometerInvoicePayableCreatedMetricsAdapter metrics;
 
 
     public CreateInvoicePayableService(
         CreateInvoicePayableRepositoryPort repository,
         CreateSupplierRepositoryPort repositorySupplier,
         KafkaTemplate<String,InvoicePayable> kafkaTemplateOrder,
-        InvoicePayableCreatedMetrics metrics
+        MicrometerInvoicePayableCreatedMetricsAdapter metrics
     ){
         this.repository = repository;
         this.repositorySupplier = repositorySupplier;
