@@ -2,13 +2,13 @@ package com.itgen.financialit.adapters.out.metrics.invoice;
 
 import org.springframework.stereotype.Component;
 
-import com.itgen.financialit.application.port.out.metrics.invoice.InvoicePayableMetricsPort;
+import com.itgen.financialit.application.port.out.metrics.invoice.InvoicePayableCreatedMetricsPort;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 
 @Component
-public class MicrometerInvoicePayableCreatedMetricsAdapter implements InvoicePayableMetricsPort{
+public class MicrometerInvoicePayableCreatedMetricsAdapter implements InvoicePayableCreatedMetricsPort{
     private final Counter invoicePayableCreated;
 
     public MicrometerInvoicePayableCreatedMetricsAdapter(MeterRegistry registry) {

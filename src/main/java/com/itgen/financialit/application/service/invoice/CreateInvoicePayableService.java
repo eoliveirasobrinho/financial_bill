@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.itgen.financialit.adapters.out.metrics.invoice.MicrometerInvoicePayableCreatedMetricsAdapter;
 import com.itgen.financialit.application.port.in.invoice.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
+import com.itgen.financialit.application.port.out.metrics.invoice.InvoicePayableCreatedMetricsPort;
 import com.itgen.financialit.application.port.out.supplier.CreateSupplierRepositoryPort;
 import com.itgen.financialit.domain.exception.invoice.InvoiceAlreadyCreatedException;
 import com.itgen.financialit.domain.model.InvoicePayable;
@@ -27,14 +28,14 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
     private final CreateSupplierRepositoryPort repositorySupplier;
     private final KafkaTemplate<String, InvoicePayable> kafkaTemplateOrder;
     private final Logger log = LoggerFactory.getLogger(CreateInvoicePayableService.class);
-    private final MicrometerInvoicePayableCreatedMetricsAdapter metrics;
+    private final InvoicePayableCreatedMetricsPort metrics;
 
 
     public CreateInvoicePayableService(
         CreateInvoicePayableRepositoryPort repository,
         CreateSupplierRepositoryPort repositorySupplier,
         KafkaTemplate<String,InvoicePayable> kafkaTemplateOrder,
-        MicrometerInvoicePayableCreatedMetricsAdapter metrics
+        InvoicePayableCreatedMetricsPort metrics
     ){
         this.repository = repository;
         this.repositorySupplier = repositorySupplier;
