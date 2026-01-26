@@ -14,7 +14,6 @@ import com.itgen.financialit.domain.model.InvoicePayable;
 public class GetAllInvoicesPayablesService implements GetAllInvoicesPayableUseCase{
 
     private GetAllInvoicesPayablesRepositoryPort repositoryPort;
-    private Logger log = LoggerFactory.getLogger(GetAllInvoicesPayablesService.class);
 
     public GetAllInvoicesPayablesService(GetAllInvoicesPayablesRepositoryPort repositoryPort){
         this.repositoryPort = repositoryPort;

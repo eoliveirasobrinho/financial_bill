@@ -15,8 +15,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
 logging:
   level:
     root: INFO
     org.springframework: INFO
+
+  
