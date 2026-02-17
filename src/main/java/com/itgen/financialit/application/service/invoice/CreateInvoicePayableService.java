@@ -6,9 +6,10 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-import com.itgen.financialit.adapters.out.metrics.invoice.MicrometerInvoicePayableCreatedMetricsAdapter;
 import com.itgen.financialit.application.port.in.invoice.CreateInvoicePayableUseCase;
 import com.itgen.financialit.application.port.out.invoice.CreateInvoicePayableRepositoryPort;
 import com.itgen.financialit.application.port.out.metrics.invoice.InvoicePayableCreatedMetricsPort;
@@ -46,6 +47,7 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
     @Override
     @Transactional
     @SuppressWarnings("null")
+    @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 100 ))
     public InvoicePayable createInvoicePayable(InvoicePayable invoicePayable) {
 
         Supplier supplier = repositorySupplier.findById(invoicePayable.getSupplier().getId()).orElseThrow(() -> new IllegalStateException("Supplier was not created"));
@@ -64,13 +66,13 @@ public class CreateInvoicePayableService implements CreateInvoicePayableUseCase{
             Status.PENDING,
             supplier
         );
-
         InvoicePayable invoiceCreated = repository.save(invoiceToSave);
         metrics.increment();
         log.info("INVOICE WAS CREATED! {}", invoiceCreated);
         log.info("INVOICE EVENT READY TO SEND TO TOPIC! TOPIC: - Invoice-payable-created-order-processed");
         kafkaTemplateOrder.send("Invoice-payable-created-order-processed", invoiceCreated);
         log.info("EVENT WAS SENDED! {}", invoiceCreated);
+        
         return invoiceCreated;
     }
 
