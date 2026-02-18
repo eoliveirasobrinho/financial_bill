@@ -40,8 +40,8 @@ public class UpdateInvoicePayableService implements UpdateInvoicePayableUseCase{
 
     @Override
     public InvoicePayable findById(Long id) {
-        InvoicePayable invoice = updateInvoicePayableRepositoryPort.findById(id);
-        return invoice;
+        return updateInvoicePayableRepositoryPort.findById(id);
+
     }
 
 }

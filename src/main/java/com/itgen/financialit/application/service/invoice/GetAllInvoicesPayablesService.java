@@ -12,8 +12,8 @@ import com.itgen.financialit.domain.model.InvoicePayable;
 @Service
 public class GetAllInvoicesPayablesService implements GetAllInvoicesPayableUseCase{
 
-    private GetAllInvoicesPayablesRepositoryPort repositoryPort;
-    private InvoicePayableGetAllInvoicesMetricsPort metrics;
+    private final GetAllInvoicesPayablesRepositoryPort repositoryPort;
+    private final InvoicePayableGetAllInvoicesMetricsPort metrics;
 
     public GetAllInvoicesPayablesService(GetAllInvoicesPayablesRepositoryPort repositoryPort, InvoicePayableGetAllInvoicesMetricsPort metrics){
         this.repositoryPort = repositoryPort;
